@@ -11,7 +11,7 @@ internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointC
     private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
     private readonly INPointCache? _cache = config.Cache;
 
-    public async Task<string> GetAsync(string documentId)
+    public async Task<string> GetAsync(string documentId, CancellationToken? cancellationToken = null)
     {
         if (string.IsNullOrWhiteSpace(documentId))
         {
@@ -24,7 +24,7 @@ internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointC
         }
 
         var path = $"{BaseUrl}{documentId}";
-        var response = await _httpClient.GetAsync(path);
+        var response = await _httpClient.GetAsync(path, cancellationToken ?? CancellationToken.None);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -41,9 +41,9 @@ internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointC
         return document;
     }
 
-    public async Task<T?> GetAsync<T>(string documentId)
+    public async Task<T?> GetAsync<T>(string documentId, CancellationToken? cancellationToken = null)
     {
-        var document = await GetAsync(documentId);
+        var document = await GetAsync(documentId, cancellationToken);
         return JsonSerializer.Deserialize<T>(document, options: config.JsonSerializerOptions);
     }
 }
