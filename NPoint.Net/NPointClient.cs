@@ -11,6 +11,7 @@ internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointC
     private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
     private readonly INPointCache? _cache = config.Cache;
 
+    /// <inheritdoc/>
     public async Task<string> GetAsync(string documentId, CancellationToken? cancellationToken = null)
     {
         if (string.IsNullOrWhiteSpace(documentId))
@@ -41,6 +42,7 @@ internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointC
         return document;
     }
 
+    /// <inheritdoc/>
     public async Task<T?> GetAsync<T>(string documentId, CancellationToken? cancellationToken = null)
     {
         var document = await GetAsync(documentId, cancellationToken);
