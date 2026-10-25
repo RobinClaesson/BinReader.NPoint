@@ -3,6 +3,7 @@ using NPoint.Net.Caching;
 
 namespace NPoint.Net.Tests;
 
+[Collection(nameof(TestFixture))]
 public class NPointFileSystemCacheTests(TestFixture fixture) : IClassFixture<TestFixture>, IDisposable
 {
     public void Dispose() => fixture.FileSystem.ClearReceivedCalls();

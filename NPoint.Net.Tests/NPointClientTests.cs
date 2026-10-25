@@ -4,6 +4,7 @@ using NSubstitute;
 
 namespace NPoint.Net.Tests;
 
+[Collection(nameof(TestFixture))]
 public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>
 {
     private record TestData(string Foo);
