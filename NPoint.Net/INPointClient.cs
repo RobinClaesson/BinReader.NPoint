@@ -41,4 +41,11 @@ public interface INPointClient
     /// No compatible JSON converter is available for <typeparamref name="T"/> or one of its members.
     /// </exception>
     Task<T?> GetAsync<T>(string documentId, CancellationToken? cancellationToken = null);
+
+    /// <summary>
+    /// Removes all documents from the configured cache.
+    /// </summary>
+    /// <returns>A task that represents the cache clearing operation.</returns>
+    /// <remarks>The operation has no effect when caching is disabled.</remarks>
+    Task ClearCacheAsync();
 }

@@ -48,4 +48,13 @@ internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointC
         var document = await GetAsync(documentId, cancellationToken);
         return JsonSerializer.Deserialize<T>(document, options: config.JsonSerializerOptions);
     }
+
+    /// <inheritdoc/>
+    public async Task ClearCacheAsync()
+    {
+        if (_cache is not null)
+        {
+            await _cache.ClearAsync();
+        }
+    }
 }

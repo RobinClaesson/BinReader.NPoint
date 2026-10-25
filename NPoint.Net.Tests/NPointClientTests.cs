@@ -209,4 +209,24 @@ public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>
         var clientRequest = Assert.Single(handler.ReceivedRequests);
         Assert.Equal($"/{documentId}", clientRequest.Route);
     }
+
+    [Fact]
+    public async Task ClearCacheAsync_WhenCacheIsNull_DoesNothing()
+    {
+        var target = fixture.CreateNPointClient(cfg => cfg.NoCache());
+
+        // To verify no exceptions
+        await target.ClearCacheAsync();
+    }
+
+    [Fact]
+    public async Task ClearCacheAsync_WhenCacheIsConfigured_ClearsCache()
+    {
+        var mockCache = Substitute.For<INPointCache>();
+        var target = fixture.CreateNPointClient(cfg => cfg.UseCache(mockCache));
+
+        await target.ClearCacheAsync();
+
+        await mockCache.Received(1).ClearAsync();
+    }
 }
