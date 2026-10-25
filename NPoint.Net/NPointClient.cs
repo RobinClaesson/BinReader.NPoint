@@ -39,6 +39,6 @@ internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointC
     public async Task<T?> GetAsync<T>(string documentId)
     {
         var document = await GetAsync(documentId);
-        return JsonSerializer.Deserialize<T>(document);
+        return JsonSerializer.Deserialize<T>(document, options: config.JsonSerializerOptions);
     }
 }
