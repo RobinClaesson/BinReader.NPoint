@@ -1,5 +1,7 @@
 # NPoint.Net
 
+[![tests](https://github.com/RobinClaesson/NPoint.Net/actions/workflows/tests.yml/badge.svg)](https://github.com/RobinClaesson/NPoint.Net/actions/workflows/tests.yml)
+
 A .NET client for reading and caching JSON bins from [npoint](https://www.npoint.io)
 by [azirbel](https://github.com/azirbel/npoint).
 
