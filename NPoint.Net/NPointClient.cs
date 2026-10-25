@@ -3,12 +3,11 @@ using NPoint.Net.Caching;
 
 namespace NPoint.Net;
 
-public class NPointClient(INPointCache cache) : INPointClient
+public class NPointClient(IHttpClientFactory httpClientFactory, INPointCache cache) : INPointClient
 {
     private const string BaseUrl = "https://api.npoint.io/";
 
-
-    private readonly HttpClient _httpClient = new();
+    private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
 
     public async Task<string> GetAsync(string documentId)
     {
