@@ -17,8 +17,11 @@ public static class ServiceRegistration
             return services.AddNPoint(config);
         }
 
-        private IServiceCollection AddNPoint(NPointConfig config) => services
-            .AddSingleton(config)
-            .AddScoped<INPointClient, NPointClient>();
+        private IServiceCollection AddNPoint(NPointConfig config)
+        {
+            var service = new ServiceDescriptor(typeof(INPointClient), typeof(NPointClient), config.ServiceLifetime);
+            services.AddSingleton(config).Add(service);
+            return services;
+        }
     }
 }
