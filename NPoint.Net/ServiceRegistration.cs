@@ -12,7 +12,7 @@ public static class ServiceRegistration
         public IServiceCollection AddNPoint(Action<NPointConfig> configure)
         {
             var config = new NPointConfig();
-            configure(new NPointConfig());
+            configure(config);
 
             return services.AddNPoint(config);
         }
