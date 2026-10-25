@@ -1,7 +1,11 @@
 <Solution>
-  <Folder Name="/SolutionItems/">
-    <File Path=".gitignore" />
-  </Folder>
-  <Project Path="NPoint.Net.Tests/NPoint.Net.Tests.csproj" />
-  <Project Path="NPoint.Net/NPoint.Net.csproj" />
+    <Folder Name="/CI/">
+        <File Path=".github\workflows\tests.yml" />
+    </Folder>
+    <Folder Name="/SolutionItems/">
+        <File Path=".gitignore" />
+        <File Path="global.json" />
+    </Folder>
+    <Project Path="NPoint.Net.Tests/NPoint.Net.Tests.csproj" />
+    <Project Path="NPoint.Net/NPoint.Net.csproj" />
 </Solution>
