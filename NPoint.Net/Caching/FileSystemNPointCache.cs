@@ -15,9 +15,12 @@ public class NPointFileSystemCache : INPointCache
 
     private static string DocumentPath(string documentId) => Path.Combine(CachePath, $"{documentId}.json");
 
-    public Task<bool> ContainsAsync(string documentId) => Task.FromResult(File.Exists(DocumentPath(documentId)));
 
-    public Task<string> GetAsync(string documentId) => File.ReadAllTextAsync(DocumentPath(documentId));
+    public async Task<string?> GetAsync(string documentId)
+    {
+        var contains = await ContainsAsync(documentId);
+        return contains ? await File.ReadAllTextAsync(DocumentPath(documentId)) : null;
+    }
 
     public Task SetAsync(string documentId, string document) =>
         File.WriteAllTextAsync(DocumentPath(documentId), document);

@@ -1,19 +1,21 @@
 using System.Text.Json;
 using NPoint.Net.Caching;
+using NPoint.Net.Config;
 
 namespace NPoint.Net;
 
-public class NPointClient(IHttpClientFactory httpClientFactory, INPointCache cache) : INPointClient
+internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointConfig config) : INPointClient
 {
     private const string BaseUrl = "https://api.npoint.io/";
 
     private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
+    private readonly INPointCache? _cache = config.Cache;
 
     public async Task<string> GetAsync(string documentId)
     {
-        if (await cache.ContainsAsync(documentId))
+        if (_cache is not null && await _cache.ContainsAsync(documentId))
         {
-            return await cache.GetAsync(documentId);
+            return (await _cache.GetAsync(documentId))!;
         }
 
         var path = $"{BaseUrl}{documentId}";
@@ -25,7 +27,11 @@ public class NPointClient(IHttpClientFactory httpClientFactory, INPointCache cac
         }
 
         var document = await response.Content.ReadAsStringAsync();
-        await cache.SetAsync(documentId, document);
+
+        if (_cache is not null)
+        {
+            await _cache.SetAsync(documentId, document);
+        }
 
         return document;
     }
