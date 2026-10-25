@@ -1,0 +1,44 @@
+name: publish
+
+on:
+  release:
+    types: [ published ]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    uses: ./.github/workflows/tests.yml
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+      - name: Set package version from release tag
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: echo "PACKAGE_VERSION=${RELEASE_TAG#v}" >> "$GITHUB_ENV"
+      - name: Restore dependencies
+        run: dotnet restore NPoint.Net/NPoint.Net.csproj
+      - name: Build
+        run: dotnet build NPoint.Net/NPoint.Net.csproj --configuration Release --no-restore -p:Version="$PACKAGE_VERSION"
+      - name: Pack
+        run: dotnet pack NPoint.Net/NPoint.Net.csproj --configuration Release --no-build --no-restore -p:Version="$PACKAGE_VERSION" --output ./artifacts
+      - name: NuGet login
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ vars.NUGET_USER }}
+      - name: Publish to NuGet
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: dotnet nuget push "./artifacts/*.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
