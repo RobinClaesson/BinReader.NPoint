@@ -5,6 +5,8 @@
     <Folder Name="/SolutionItems/">
         <File Path=".gitignore" />
         <File Path="global.json" />
+        <File Path="LICENSE" />
+        <File Path="README.md" />
     </Folder>
     <Project Path="NPoint.Net.Tests/NPoint.Net.Tests.csproj" />
     <Project Path="NPoint.Net/NPoint.Net.csproj" />
