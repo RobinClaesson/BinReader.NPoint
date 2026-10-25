@@ -8,13 +8,28 @@ public class NPointFileSystemCache : INPointCache
             Directory.CreateDirectory(CachePath);
     }
 
+    public TimeSpan Ttl { get; set; } = new TimeSpan(0, 5, 0);
+
     private static readonly string CachePath = Path.Join(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
         "CalcTools"
     );
 
-    private static string DocumentPath(string documentId) => Path.Combine(CachePath, $"{documentId}.json");
+    private static string DocumentPath(string documentId) =>
+        Path.Combine(CachePath, $"{documentId}.json");
 
+    public Task<bool> ContainsAsync(string documentId)
+    {
+        var filePath = DocumentPath(documentId);
+
+        if (!File.Exists(filePath))
+            return Task.FromResult(false);
+
+        var invalidAt = DateTime.UtcNow - Ttl;
+        var creationTime = File.GetLastWriteTimeUtc(filePath);
+
+        return Task.FromResult(creationTime >= invalidAt);
+    }
 
     public async Task<string?> GetAsync(string documentId)
     {

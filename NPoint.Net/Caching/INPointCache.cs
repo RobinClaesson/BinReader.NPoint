@@ -6,4 +6,5 @@ public interface INPointCache
     Task<string?> GetAsync(string documentId);
     Task SetAsync(string documentId, string document);
     Task ClearAsync();
+    TimeSpan Ttl { get; set; }
 }
