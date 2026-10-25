@@ -13,6 +13,11 @@ internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointC
 
     public async Task<string> GetAsync(string documentId)
     {
+        if (string.IsNullOrWhiteSpace(documentId))
+        {
+            throw new ArgumentException($"{nameof(documentId)} can not be null or empty", nameof(documentId));
+        }
+
         if (_cache is not null && await _cache.ContainsAsync(documentId))
         {
             return (await _cache.GetAsync(documentId))!;
