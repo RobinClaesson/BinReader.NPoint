@@ -8,6 +8,16 @@ public class NPointFileSystemCacheTests(TestFixture fixture) : IClassFixture<Tes
 {
     public void Dispose() => fixture.FileSystem.ClearReceivedCalls();
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void Init_WhenTtlIsZeroOrNegative_ThrowsArgumentOutOfRangeException(int seconds)
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new NPointFileSystemCache { Ttl = TimeSpan.FromSeconds(seconds) }
+        );
+    }
+
     [Fact]
     public async Task ContainsAsync_WhenFileDoesNotExist_ReturnsFalse()
     {

@@ -21,22 +21,20 @@ public class NPointFileSystemCache : INPointCache
             FileSystem.CreateDirectory(FileSystem.CachePath);
     }
 
-    /// <summary>
-    /// Gets or sets the duration for which a cached file remains valid after its last write.
-    /// </summary>
-    /// <value>The time to live for cached files. The default is five minutes.</value>
-    public TimeSpan Ttl { get; set; } = new TimeSpan(0, 5, 0);
+    /// <inheritdoc/>
+    public TimeSpan Ttl
+    {
+        get;
+        init
+        {
+            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(value, TimeSpan.Zero);
+            field = value;
+        }
+    } = new(0, 5, 0);
 
     private static string DocumentPath(string documentId) => Path.Combine(FileSystem.CachePath, $"{documentId}.json");
 
-    /// <summary>
-    /// Determines whether a document's cache file exists and has not expired according to <see cref="Ttl"/>.
-    /// </summary>
-    /// <param name="documentId">The identifier of the cached document.</param>
-    /// <returns>
-    /// A task whose result is <see langword="true"/> if an unexpired cache file exists;
-    /// otherwise, <see langword="false"/>.
-    /// </returns>
+    /// <inheritdoc/>
     public Task<bool> ContainsAsync(string documentId)
     {
         var filePath = DocumentPath(documentId);
@@ -50,33 +48,16 @@ public class NPointFileSystemCache : INPointCache
         return Task.FromResult(creationTime >= invalidAt);
     }
 
-    /// <summary>
-    /// Reads an unexpired document from its cache file.
-    /// </summary>
-    /// <param name="documentId">The identifier of the cached document.</param>
-    /// <returns>
-    /// A task whose result is the cached JSON content, or <see langword="null"/> if the cache file
-    /// is missing or expired.
-    /// </returns>
-    public async Task<string?> GetAsync(string documentId)
-    {
-        var contains = await ContainsAsync(documentId);
-        return contains ? await FileSystem.ReadAllTextAsync(DocumentPath(documentId)) : null;
-    }
+    /// <inheritdoc/>
+    public async Task<string?> GetAsync(string documentId) => await ContainsAsync(documentId)
+        ? await FileSystem.ReadAllTextAsync(DocumentPath(documentId))
+        : null;
 
-    /// <summary>
-    /// Writes a document to its cache file, replacing any existing content.
-    /// </summary>
-    /// <param name="documentId">The identifier used to name the cache file.</param>
-    /// <param name="document">The JSON content to cache.</param>
-    /// <returns>A task that represents the file write operation.</returns>
+    /// <inheritdoc/>
     public Task SetAsync(string documentId, string document) =>
         FileSystem.WriteAllTextAsync(DocumentPath(documentId), document);
 
-    /// <summary>
-    /// Deletes all files in the shared cache directory, including expired cache files.
-    /// </summary>
-    /// <returns>A completed task after all files have been deleted.</returns>
+    /// <inheritdoc/>
     public Task ClearAsync()
     {
         var files = FileSystem.GetDirectoryFiles(FileSystem.CachePath);

@@ -40,8 +40,12 @@ public interface INPointCache
     Task ClearAsync();
 
     /// <summary>
-    /// Gets or sets the duration for which a cached document remains valid after it is written.
+    /// Gets or sets the duration for which documents remain valid after they are written.
     /// </summary>
-    /// <value>The time to live for cached documents.</value>
-    TimeSpan Ttl { get; set; }
+    /// <value>A positive time to live. The default is five minutes.</value>
+    /// <remarks>
+    /// Reads do not extend expiration.
+    /// </remarks>
+    /// <exception cref="ArgumentOutOfRangeException">The value is zero or negative.</exception>
+    TimeSpan Ttl { get; init; }
 }
