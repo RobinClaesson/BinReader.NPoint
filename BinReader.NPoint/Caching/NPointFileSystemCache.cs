@@ -64,4 +64,10 @@ public class NPointFileSystemCache : INPointCache
         files.ForEach(FileSystem.DeleteFile);
         return Task.CompletedTask;
     }
+
+    /// <inheritdoc />
+    public void Dispose()
+    {
+        GC.SuppressFinalize(this);
+    }
 }

@@ -3,7 +3,7 @@ namespace BinReader.NPoint.Caching;
 /// <summary>
 /// Stores and retrieves npoint JSON documents with a configurable time to live.
 /// </summary>
-public interface INPointCache
+public interface INPointCache : IDisposable
 {
     /// <summary>
     /// Determines whether the cache contains an unexpired document.
