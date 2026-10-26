@@ -10,8 +10,13 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/RobinClaesson/BinReader.NPoint</RepositoryUrl>
         <PackageId>BinReader.NPoint</PackageId>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <Authors>RobinClaesson</Authors>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../README.md" Pack="true" PackagePath="/"/>
+    </ItemGroup>
 
     <ItemGroup>
         <InternalsVisibleTo Include="BinReader.NPoint.Tests"/>

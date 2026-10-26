@@ -7,7 +7,6 @@
         <File Path=".gitignore" />
         <File Path="global.json" />
         <File Path="LICENSE" />
-        <File Path="README.md" />
     </Folder>
     <Project Path="BinReader.NPoint.Tests\BinReader.NPoint.Tests.csproj" />
     <Project Path="BinReader.NPoint\BinReader.NPoint.csproj" />
