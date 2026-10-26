@@ -8,17 +8,21 @@ namespace BinReader.NPoint.Config;
 /// Configures document caching, JSON deserialization, and the npoint client's service lifetime.
 /// </summary>
 /// <remarks>
-/// By default, caching uses <see cref="NPointFileSystemCache"/> with a five-minute time to live.
+/// By default, caching uses <see cref="NPointMemoryCache"/> with a five-minute time to live.
 /// </remarks>
 public class NPointConfig
 {
-    internal INPointCache? Cache { get; set; } = new NPointFileSystemCache();
+    internal INPointCache? Cache { get; set; } = new NPointMemoryCache();
 
     /// <summary>
     /// Sets the cache used by newly created npoint clients.
     /// </summary>
     /// <param name="cache">The cache instance used to store and retrieve JSON documents.</param>
-    public void UseCache(INPointCache cache) => Cache = cache;
+    public void UseCache(INPointCache cache)
+    {
+        Cache?.Dispose();
+        Cache = cache;
+    }
 
     /// <summary>
     /// Disables caching for newly created npoint clients so each retrieval sends an HTTP request.

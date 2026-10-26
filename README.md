@@ -55,7 +55,7 @@ Both methods accept an optional cancellation token.
 
 ### Configurations
 
-By default, the client uses `NPointFileSystemCache` with a five-minute time to live (TTL), default `System.Text.Json`
+By default, the client uses `NPointMemoryCache` with a five-minute time to live (TTL), default `System.Text.Json`
 serializer options, and a scoped service lifetime.
 
 You can customize these settings when registering services:
@@ -80,12 +80,22 @@ services.AddNPoint(config =>
 });
 ```
 
-`UseCache` accepts any `INPointCache` implementation. To disable caching and fetch from npoint on every call, register
+BinReader.NPoint has implementations for in memory and file system caches, but `UseCache` accepts any `INPointCache`
+implementation.
+
+To disable caching and fetch from npoint on every call, register
 with:
 
 ```csharp
 services.AddNPoint(config => config.NoCache());
 ```
+
+The default TTL is five minutes and must be positive. Each write sets an absolute expiration; reads do not extend it.
+Changing `Ttl` affects subsequent writes. Each cache instance has its own entries, and `ClearCacheAsync` clears only
+that instance. Entries are lost when the process exits.
+
+Keep the cache alive for as long as its clients need it and dispose it afterward. `UseCache` does not manage the
+cache's lifetime; the `using` scope above should include the application's lifetime.
 
 ## Credits & Dependencies
 
