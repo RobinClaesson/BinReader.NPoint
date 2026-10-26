@@ -36,7 +36,7 @@ public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>
                                     """;
 
         var mockCache = Substitute.For<INPointCache>();
-        mockCache.ContainsAsync(Arg.Any<string>()).Returns(false);
+        mockCache.GetAsync(Arg.Any<string>()).Returns((string?)null);
 
         var npointHandler = fixture.SetupNPointHttpCall(documentJson);
         var target = fixture.CreateNPointClient(cfg => cfg.UseCache(mockCache));
@@ -47,9 +47,8 @@ public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>
         var clientRequest = Assert.Single(npointHandler.ReceivedRequests);
         Assert.Equal($"/{documentId}", clientRequest.Route);
 
-        await mockCache.Received(1).ContainsAsync(documentId);
+        await mockCache.Received(1).GetAsync(documentId);
         await mockCache.Received(1).SetAsync(documentId, documentJson);
-        await mockCache.DidNotReceive().GetAsync(Arg.Any<string>());
     }
 
     [Fact]
@@ -61,7 +60,6 @@ public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>
                                     """;
 
         var mockCache = Substitute.For<INPointCache>();
-        mockCache.ContainsAsync(Arg.Any<string>()).Returns(true);
         mockCache.GetAsync(documentId).Returns(documentJson);
 
         var npointHandler = fixture.SetupNPointHttpCall(documentJson);
@@ -72,7 +70,6 @@ public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>
 
         Assert.Empty(npointHandler.ReceivedRequests);
 
-        await mockCache.Received(1).ContainsAsync(documentId);
         await mockCache.Received(1).GetAsync(documentId);
         await mockCache.DidNotReceive().SetAsync(Arg.Any<string>(), Arg.Any<string>());
     }
@@ -126,7 +123,7 @@ public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>
         var expectedData = new TestData("bar");
 
         var mockCache = Substitute.For<INPointCache>();
-        mockCache.ContainsAsync(Arg.Any<string>()).Returns(false);
+        mockCache.GetAsync(Arg.Any<string>()).Returns((string?)null);
 
         var npointHandler = fixture.SetupNPointHttpCall(documentJson);
         var target = fixture.CreateNPointClient(cfg => cfg.UseCache(mockCache));
@@ -137,9 +134,8 @@ public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>
         var clientRequest = Assert.Single(npointHandler.ReceivedRequests);
         Assert.Equal($"/{documentId}", clientRequest.Route);
 
-        await mockCache.Received(1).ContainsAsync(documentId);
+        await mockCache.Received(1).GetAsync(documentId);
         await mockCache.Received(1).SetAsync(documentId, documentJson);
-        await mockCache.DidNotReceive().GetAsync(Arg.Any<string>());
     }
 
     [Fact]
@@ -152,7 +148,6 @@ public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>
         var expectedData = new TestData("bar");
 
         var mockCache = Substitute.For<INPointCache>();
-        mockCache.ContainsAsync(Arg.Any<string>()).Returns(true);
         mockCache.GetAsync(documentId).Returns(documentJson);
 
         var npointHandler = fixture.SetupNPointHttpCall(documentJson);
@@ -163,7 +158,6 @@ public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>
 
         Assert.Empty(npointHandler.ReceivedRequests);
 
-        await mockCache.Received(1).ContainsAsync(documentId);
         await mockCache.Received(1).GetAsync(documentId);
         await mockCache.DidNotReceive().SetAsync(Arg.Any<string>(), Arg.Any<string>());
     }

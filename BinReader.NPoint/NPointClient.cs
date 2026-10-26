@@ -19,9 +19,9 @@ internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointC
             throw new ArgumentException($"{nameof(documentId)} can not be null or empty", nameof(documentId));
         }
 
-        if (_cache is not null && await _cache.ContainsAsync(documentId))
+        if (_cache is not null && await _cache.GetAsync(documentId) is { } cachedDocument)
         {
-            return (await _cache.GetAsync(documentId))!;
+            return cachedDocument;
         }
 
         var path = $"{BaseUrl}{documentId}";
