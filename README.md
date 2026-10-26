@@ -1,8 +1,11 @@
-# BinReader.NPoint
-
+BinReader.NPoint
+========
 [![tests](https://github.com/RobinClaesson/BinReader.NPoint/actions/workflows/tests.yml/badge.svg)](https://github.com/RobinClaesson/BinReader.NPoint/actions/workflows/tests.yml)
+[![publish](https://github.com/RobinClaesson/BinReader.NPoint/actions/workflows/publish.yml/badge.svg?event=release)](https://github.com/RobinClaesson/BinReader.NPoint/actions/workflows/publish.yml)
+[![NuGet Version](https://img.shields.io/nuget/v/BinReader.NPoint)](https://www.nuget.org/packages/BinReader.NPoint)
+[![GitHub License](https://img.shields.io/github/license/RobinClaesson/BinReader.NPoint)](LICENSE)
 
-A .NET client for reading and caching JSON bins from [npoint](https://www.npoint.io)
+A .NET client for reading and caching JSON bins from [n:point](https://www.npoint.io)
 by [azirbel](https://github.com/azirbel/npoint).
 
 ## Usage
