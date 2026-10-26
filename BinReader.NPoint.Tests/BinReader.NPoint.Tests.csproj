@@ -13,6 +13,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Fortitude" Version="10.1.2"/>
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.14" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0"/>
         <PackageReference Include="NSubstitute" Version="6.2.0"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1">
