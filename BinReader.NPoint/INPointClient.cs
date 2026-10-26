@@ -3,7 +3,7 @@ namespace BinReader.NPoint;
 /// <summary>
 /// Retrieves JSON documents from npoint, using a cache when one is configured.
 /// </summary>
-public interface INPointClient
+public interface INPointClient : IDisposable
 {
     /// <summary>
     /// Retrieves the JSON content of a document.

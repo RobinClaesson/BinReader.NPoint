@@ -57,4 +57,11 @@ internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointC
             await _cache.ClearAsync();
         }
     }
+
+    /// <inheritdoc/>
+    public void Dispose()
+    {
+        _cache?.Dispose();
+        _httpClient.Dispose();
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using BinReader.NPoint.Caching;
+using BinReader.NPoint.Config;
 using NSubstitute;
 
 namespace BinReader.NPoint.Tests;
@@ -222,5 +223,23 @@ public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>
         await target.ClearCacheAsync();
 
         await mockCache.Received(1).ClearAsync();
+    }
+
+    [Fact]
+    public void Dispose_DisposesResources()
+    {
+        var mockCache = Substitute.For<INPointCache>();
+        var mockHttpClient = Substitute.For<HttpClient>();
+        var mockHttpClientFactory = Substitute.For<IHttpClientFactory>();
+        mockHttpClientFactory.CreateClient().Returns(mockHttpClient);
+
+        var config = new NPointConfig();
+        config.UseCache(mockCache);
+        var target = new NPointClient(mockHttpClientFactory, config);
+
+        target.Dispose();
+
+        mockCache.Received(1).Dispose();
+        mockHttpClient.Received(1).Dispose();
     }
 }
