@@ -90,13 +90,6 @@ with:
 services.AddNPoint(config => config.NoCache());
 ```
 
-The default TTL is five minutes and must be positive. Each write sets an absolute expiration; reads do not extend it.
-Changing `Ttl` affects subsequent writes. Each cache instance has its own entries, and `ClearCacheAsync` clears only
-that instance. Entries are lost when the process exits.
-
-Keep the cache alive for as long as its clients need it and dispose it afterward. `UseCache` does not manage the
-cache's lifetime; the `using` scope above should include the application's lifetime.
-
 ## Credits & Dependencies
 
 - n:point - A lightweight data store for your app or prototype, and the target for this project.
