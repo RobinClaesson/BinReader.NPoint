@@ -1,4 +1,4 @@
-namespace NPoint.Net.Caching;
+namespace BinReader.NPoint.Caching;
 
 /// <summary>
 /// Caches npoint JSON documents as files on the local file system.

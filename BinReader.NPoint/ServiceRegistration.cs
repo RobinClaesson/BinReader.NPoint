@@ -1,7 +1,7 @@
+using BinReader.NPoint.Config;
 using Microsoft.Extensions.DependencyInjection;
-using NPoint.Net.Config;
 
-namespace NPoint.Net;
+namespace BinReader.NPoint;
 
 /// <summary>
 /// Provides extension methods for registering npoint clients with dependency injection.

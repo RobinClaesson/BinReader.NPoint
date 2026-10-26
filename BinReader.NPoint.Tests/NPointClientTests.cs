@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
-using NPoint.Net.Caching;
+using BinReader.NPoint.Caching;
 using NSubstitute;
 
-namespace NPoint.Net.Tests;
+namespace BinReader.NPoint.Tests;
 
 [Collection(nameof(TestFixture))]
 public class NPointClientTests(TestFixture fixture) : IClassFixture<TestFixture>

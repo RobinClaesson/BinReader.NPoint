@@ -1,10 +1,10 @@
 using Fortitude.Client;
 using Microsoft.Extensions.DependencyInjection;
-using NPoint.Net.Caching;
-using NPoint.Net.Config;
+using BinReader.NPoint.Caching;
+using BinReader.NPoint.Config;
 using NSubstitute;
 
-namespace NPoint.Net.Tests;
+namespace BinReader.NPoint.Tests;
 
 public class TestFixture
 {

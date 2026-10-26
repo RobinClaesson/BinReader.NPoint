@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\NPoint.Net\NPoint.Net.csproj"/>
+        <ProjectReference Include="..\BinReader.NPoint\BinReader.NPoint.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -1,15 +1,23 @@
-# NPoint.Net
+# BinReader.NPoint
 
-[![tests](https://github.com/RobinClaesson/NPoint.Net/actions/workflows/tests.yml/badge.svg)](https://github.com/RobinClaesson/NPoint.Net/actions/workflows/tests.yml)
+[![tests](https://github.com/RobinClaesson/BinReader.NPoint/actions/workflows/tests.yml/badge.svg)](https://github.com/RobinClaesson/BinReader.NPoint/actions/workflows/tests.yml)
 
 A .NET client for reading and caching JSON bins from [npoint](https://www.npoint.io)
 by [azirbel](https://github.com/azirbel/npoint).
 
 ## Usage
 
+Install the package:
+
+```sh
+dotnet add package BinReader.NPoint
+```
+
 Register the NPoint services and IHttpClientFactory:
 
 ```csharp
+using BinReader.NPoint;
+
 services.AddNPoint();
 services.AddHttpClient(); //Or any other IHttpClientFactory
 ```
@@ -32,12 +40,12 @@ public class Example(INPointClient client)
 }
 ```
 
-Output:
+Example output:
 
 ```
-{"Info":"Example object for the README of https://github.com/RobinClaesson/NPoint.Net, a .NET client for reading and caching n:point bins","Name":"NPoint.Net Example","Version":1}
+{"Info":"Example object for the README of https://github.com/RobinClaesson/BinReader.NPoint, a .NET client for reading and caching n:point bins","Name":"BinReader.NPoint Example","Version":1}
 
-ExampleData { Name = NPoint.Net Example, Version = 1, Info = Example object for the README of https://github.com/RobinClaesson/NPoint.Net, a .NET client for reading and caching n:point bins }
+ExampleData { Name = BinReader.NPoint Example, Version = 1, Info = Example object for the README of https://github.com/RobinClaesson/BinReader.NPoint, a .NET client for reading and caching n:point bins }
 ```
 
 Both methods accept an optional cancellation token.
@@ -51,7 +59,7 @@ You can customize these settings when registering services:
 
 ```csharp
 using System.Text.Json;
-using NPoint.Net.Caching;
+using BinReader.NPoint.Caching;
 
 services.AddNPoint(config =>
 {
@@ -76,14 +84,6 @@ with:
 services.AddNPoint(config => config.NoCache());
 ```
 
-## Building
-
-Install the .NET 10 SDK, then run from the repository root:
-
-```sh
-dotnet build
-```
-
 ## Credits & Dependencies
 
 - n:point - A lightweight data store for your app or prototype, and the target for this project.
@@ -100,7 +100,7 @@ dotnet build
 
 # License & Copyright
 
-NPoint.Net released under the [MIT license](LICENSE). Copyright (c) 2026 Robin Claesson.
+BinReader.NPoint released under the [MIT license](LICENSE). Copyright (c) 2026 Robin Claesson.
 
 n:point and the n:point logo are the property of Alexander
 Zirbel. [Copyright (c) 2017-2018](https://github.com/azirbel/npoint#copyright--license)

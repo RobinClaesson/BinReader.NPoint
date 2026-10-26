@@ -9,6 +9,6 @@
         <File Path="LICENSE" />
         <File Path="README.md" />
     </Folder>
-    <Project Path="NPoint.Net.Tests/NPoint.Net.Tests.csproj" />
-    <Project Path="NPoint.Net/NPoint.Net.csproj" />
+    <Project Path="BinReader.NPoint.Tests\BinReader.NPoint.Tests.csproj" />
+    <Project Path="BinReader.NPoint\BinReader.NPoint.csproj" />
 </Solution>

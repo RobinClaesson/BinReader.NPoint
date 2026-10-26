@@ -1,4 +1,4 @@
-namespace NPoint.Net.Caching;
+namespace BinReader.NPoint.Caching;
 
 /// <summary>
 /// Stores and retrieves npoint JSON documents with a configurable time to live.

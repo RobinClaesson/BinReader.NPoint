@@ -28,4 +28,4 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Unit Tests
-        run: dotnet test --project NPoint.Net.Tests/NPoint.Net.Tests.csproj --configuration Release --no-build --no-restore --verbosity normal
+        run: dotnet test --project BinReader.NPoint.Tests/BinReader.NPoint.Tests.csproj --configuration Release --no-build --no-restore --verbosity normal

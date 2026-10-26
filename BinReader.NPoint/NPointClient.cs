@@ -1,8 +1,8 @@
 using System.Text.Json;
-using NPoint.Net.Caching;
-using NPoint.Net.Config;
+using BinReader.NPoint.Caching;
+using BinReader.NPoint.Config;
 
-namespace NPoint.Net;
+namespace BinReader.NPoint;
 
 internal sealed class NPointClient(IHttpClientFactory httpClientFactory, NPointConfig config) : INPointClient
 {

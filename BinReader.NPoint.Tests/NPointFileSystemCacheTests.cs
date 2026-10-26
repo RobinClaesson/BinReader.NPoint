@@ -1,7 +1,7 @@
 using NSubstitute;
-using NPoint.Net.Caching;
+using BinReader.NPoint.Caching;
 
-namespace NPoint.Net.Tests;
+namespace BinReader.NPoint.Tests;
 
 [Collection(nameof(TestFixture))]
 public class NPointFileSystemCacheTests(TestFixture fixture) : IClassFixture<TestFixture>, IDisposable

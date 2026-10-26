@@ -1,4 +1,4 @@
-namespace NPoint.Net.Caching;
+namespace BinReader.NPoint.Caching;
 
 internal interface IFileSystem
 {

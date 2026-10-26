@@ -38,11 +38,11 @@ jobs:
           RELEASE_TAG: ${{ inputs.release_tag || github.event.release.tag_name }}
         run: echo "PACKAGE_VERSION=${RELEASE_TAG#v}" >> "$GITHUB_ENV"
       - name: Restore dependencies
-        run: dotnet restore NPoint.Net/NPoint.Net.csproj
+        run: dotnet restore BinReader.NPoint/BinReader.NPoint.csproj
       - name: Build
-        run: dotnet build NPoint.Net/NPoint.Net.csproj --configuration Release --no-restore -p:Version="$PACKAGE_VERSION"
+        run: dotnet build BinReader.NPoint/BinReader.NPoint.csproj --configuration Release --no-restore -p:Version="$PACKAGE_VERSION"
       - name: Pack
-        run: dotnet pack NPoint.Net/NPoint.Net.csproj --configuration Release --no-build --no-restore -p:Version="$PACKAGE_VERSION" --output ./artifacts
+        run: dotnet pack BinReader.NPoint/BinReader.NPoint.csproj --configuration Release --no-build --no-restore -p:Version="$PACKAGE_VERSION" --output ./artifacts
       - name: NuGet login
         uses: NuGet/login@v1
         id: login

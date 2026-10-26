@@ -8,11 +8,13 @@
         <Description>A .NET client for reading and caching JSON bins from https://www.npoint.io/</Description>
         <Copyright>Robin Claesson</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <RepositoryUrl>https://github.com/RobinClaesson/NPoint.Net</RepositoryUrl>
+        <RepositoryUrl>https://github.com/RobinClaesson/BinReader.NPoint</RepositoryUrl>
+        <PackageId>BinReader.NPoint</PackageId>
+        <Authors>RobinClaesson</Authors>
     </PropertyGroup>
 
     <ItemGroup>
-        <InternalsVisibleTo Include="NPoint.Net.Tests"/>
+        <InternalsVisibleTo Include="BinReader.NPoint.Tests"/>
         <InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
     </ItemGroup>
 

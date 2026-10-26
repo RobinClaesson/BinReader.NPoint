@@ -1,4 +1,4 @@
-namespace NPoint.Net;
+namespace BinReader.NPoint;
 
 /// <summary>
 /// Retrieves JSON documents from npoint, using a cache when one is configured.

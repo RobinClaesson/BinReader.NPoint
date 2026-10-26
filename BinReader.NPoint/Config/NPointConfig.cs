@@ -1,8 +1,8 @@
 using System.Text.Json;
+using BinReader.NPoint.Caching;
 using Microsoft.Extensions.DependencyInjection;
-using NPoint.Net.Caching;
 
-namespace NPoint.Net.Config;
+namespace BinReader.NPoint.Config;
 
 /// <summary>
 /// Configures document caching, JSON deserialization, and the npoint client's service lifetime.
